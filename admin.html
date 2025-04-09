@@ -1,0 +1,166 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8">
+  <title>Administración de Usuarios</title>
+  <style>
+    body {
+      font-family: Arial, sans-serif;
+      background: #eef3f8;
+      padding: 2rem;
+    }
+    h1 {
+      text-align: center;
+    }
+    table {
+      width: 100%;
+      border-collapse: collapse;
+      margin-top: 2rem;
+    }
+    th, td {
+      padding: 0.8rem;
+      border: 1px solid #ccc;
+      text-align: left;
+    }
+    img {
+      width: 50px;
+      height: 50px;
+      border-radius: 50%;
+      object-fit: cover;
+    }
+    button {
+      padding: 0.4rem 0.6rem;
+      margin-right: 0.3rem;
+    }
+    @media (max-width: 768px) {
+      table, thead, tbody, th, td, tr {
+        display: block;
+      }
+      th, td {
+        padding: 0.5rem;
+      }
+      td {
+        border-bottom: 1px solid #ccc;
+      }
+    }
+    /* Estilos para los botones de navegación */
+    .nav-links a {
+      background: #0077b6;
+      color: white;
+      padding: 0.6rem 1.2rem;
+      margin: 0.3rem;
+      text-decoration: none;
+      border-radius: 5px;
+      display: inline-block;
+    }
+  </style>
+</head>
+<body>
+  <h1>Administración de Usuarios Registrados</h1>
+  <table>
+    <thead>
+      <tr>
+        <th>Foto</th>
+        <th>Nombre</th>
+        <th>Email</th>
+        <th>Rol</th>
+        <th>Acciones</th>
+      </tr>
+    </thead>
+    <tbody id="adminBody"></tbody>
+  </table>
+
+  <!-- Bloque único de navegación -->
+  <div class="nav-links" style="text-align: center; margin: 2rem;">
+   <a href="startups.html">Startups</a>
+    <a href="empresas.html">Empresas</a>
+    <a href="inversores.html">Inversores</a>
+    <a href="profesionales.html">Profesionales</a>
+  </div>
+
+  <footer style="text-align:center; padding: 2rem;">
+    <div style="text-align:center; margin: 1rem;">
+      <a href="registro.html" style="background:#0077b6;color:white;padding:0.6rem 1.2rem;text-decoration:none;border-radius:5px;">
+        ⬅ Volver al Registro
+      </a>
+    </div>
+    <!-- Un solo bloque de exportación -->
+    <div style="text-align:center; margin-top: 1rem;">
+      <button onclick="exportarPDF()" class="boton">Exportar a PDF</button>
+      <button onclick="exportarCSV()" class="boton">Exportar a Excel</button>
+    </div>
+  </footer>
+
+  <script>
+    const registros = JSON.parse(localStorage.getItem('registros')) || [];
+    const tbody = document.getElementById("adminBody");
+
+    registros.forEach((reg, index) => {
+      const row = document.createElement("tr");
+      row.innerHTML = `
+        <td><img src="${reg.foto || ''}" alt="Foto" /></td>
+        <td>${reg.nombre} ${reg.apellidos || reg.apellidos_or_razon}</td>
+        <td>${reg.email}</td>
+        <td>${reg.rol}</td>
+        <td>
+          <button onclick="editar(${index})">Editar</button>
+          <button onclick="eliminar(${index})">Eliminar</button>
+        </td>
+      `;
+      tbody.appendChild(row);
+    });
+
+    function eliminar(index) {
+      if (confirm("¿Seguro que deseas eliminar este registro?")) {
+        registros.splice(index, 1);
+        localStorage.setItem("registros", JSON.stringify(registros));
+        location.reload();
+      }
+    }
+
+    function editar(index) {
+      alert("Para editar, ve al formulario y selecciona el registro desde la consola del navegador.");
+    }
+  </script>
+
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf/2.5.1/jspdf.umd.min.js"></script>
+  <script>
+    function exportarCSV() {
+      const registros = JSON.parse(localStorage.getItem('registros')) || [];
+      let csvContent = "data:text/csv;charset=utf-8,Nombre,Apellidos,Email,Formación,Mensaje,Rol\n";
+      registros.forEach(r => {
+        csvContent += `${r.nombre},${r.apellidos || r.apellidos_or_razon},${r.email},${r.formacion},${r.mensaje},${r.rol}\n`;
+      });
+      const encodedUri = encodeURI(csvContent);
+      const link = document.createElement("a");
+      link.setAttribute("href", encodedUri);
+      link.setAttribute("download", "usuarios_registrados.csv");
+      document.body.appendChild(link);
+      link.click();
+      document.body.removeChild(link);
+    }
+
+    async function exportarPDF() {
+      const { jsPDF } = window.jspdf;
+      const registros = JSON.parse(localStorage.getItem('registros')) || [];
+      const doc = new jsPDF();
+      doc.setFontSize(12);
+      doc.text("Usuarios Registrados", 14, 15);
+      let y = 25;
+      registros.forEach((r, i) => {
+        doc.text(`Nombre: ${r.nombre} ${r.apellidos || r.apellidos_or_razon}`, 14, y);
+        doc.text(`Email: ${r.email}`, 14, y + 6);
+        doc.text(`Formación: ${r.formacion}`, 14, y + 12);
+        doc.text(`Mensaje: ${r.mensaje}`, 14, y + 18);
+        doc.text(`Rol: ${r.rol}`, 14, y + 24);
+        y += 35;
+        if (y > 270) {
+          doc.addPage();
+          y = 20;
+        }
+      });
+      doc.save("usuarios_registrados.pdf");
+    }
+  </script>
+</body>
+</html>

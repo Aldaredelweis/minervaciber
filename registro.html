@@ -1,0 +1,331 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta charset="UTF-8">
+    <title>Index - Smartkea</title>
+    <style>
+
+body {
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+    background: linear-gradient(to bottom right, #e0f7fa, #fdfbfb);
+    color: #1f2937;
+    margin: 0;
+}
+header {
+    background: linear-gradient(to right, #0f2027, #203a43, #2c5364);
+    color: white;
+    padding: 2rem 1rem;
+    text-align: center;
+    box-shadow: 0 4px 10px rgba(0,0,0,0.2);
+}
+header img {
+    height: 80px;
+    max-width: 100%;
+    margin-bottom: 0.5rem;
+}
+nav {
+    background-color: #0077b6;
+    display: flex;
+    justify-content: center;
+    flex-wrap: wrap;
+    box-shadow: 0 2px 6px rgba(0,0,0,0.15);
+}
+nav a {
+    color: white;
+    text-decoration: none;
+    padding: 0.8rem 1.5rem;
+    display: block;
+    font-weight: bold;
+    transition: background-color 0.3s ease;
+}
+nav a:hover {
+    background-color: #00b4d8;
+}
+main {
+    max-width: 90%;
+    width: 100%;
+    margin: auto;
+    padding: 2rem 1rem;
+    background-color: white;
+    box-shadow: 0px 2px 12px rgba(0,0,0,0.1);
+    margin-top: 2rem;
+    border-radius: 8px;
+    animation: fadeIn 1s ease-in-out;
+}
+h1, h2 {
+    color: #0a192f;
+}
+.card {
+    background-color: #f1f9ff;
+    border-left: 6px solid #0077b6;
+    padding: 1rem;
+    margin: 1rem 0;
+    border-radius: 6px;
+    box-shadow: 0 2px 4px rgba(0,0,0,0.05);
+}
+footer {
+    background-color: #0f2027;
+    color: white;
+    text-align: center;
+    padding: 1rem;
+    margin-top: 3rem;
+}
+footer a {
+    color: white;
+    text-decoration: none;
+}
+footer a:hover {
+    text-decoration: underline;
+}
+@keyframes fadeIn {
+    from { opacity: 0; transform: translateY(10px); }
+    to { opacity: 1; transform: translateY(0); }
+}
+@media (max-width: 768px) {
+    nav {
+        flex-direction: column;
+    }
+    nav a {
+        padding: 0.75rem 1rem;
+    }
+    main {
+        padding: 1.5rem 1rem;
+    }
+    header img {
+        height: 60px;
+    }
+    h1 {
+        font-size: 1.5rem;
+    }
+}
+
+</style>
+
+<style>
+.botonera {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+    gap: 1rem;
+    margin: 2rem 0;
+}
+
+.botonera a {
+    display: block;
+    padding: 1rem;
+    background-color: #0077b6;
+    color: white;
+    text-decoration: none;
+    border-radius: 8px;
+    font-weight: bold;
+    text-align: center;
+    min-width: 200px;
+}
+
+@media (max-width: 768px) {
+    .botonera {
+        flex-direction: column;
+        align-items: center;
+    }
+
+    .botonera a {
+        width: 100%;
+        max-width: 300px;
+    }
+}
+</style>
+
+
+<style>
+.botonera {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+    gap: 1rem;
+    margin-top: 2rem;
+}
+
+.botonera a {
+    background: #0077b6;
+    color: white;
+    padding: 0.8rem 1.2rem;
+    text-decoration: none;
+    border-radius: 5px;
+    min-width: 150px;
+    text-align: center;
+    font-weight: bold;
+}
+
+@media (max-width: 768px) {
+    .botonera {
+        flex-direction: column;
+        align-items: center;
+    }
+
+    .botonera a {
+        width: 90%;
+    }
+}
+</style>
+
+</head>
+<body>
+<main style="padding: 2rem; max-width: 1000px; margin: auto;">
+
+
+  <h1>Formulario de Registro</h1>
+  <form id="registroForm" style="max-width: 600px; margin: 0 auto;">
+    <input type="hidden" id="editIndex">
+    <input type="text" id="nombre" placeholder="Nombre" required><br>
+    <input type="text" id="apellidos_or_razon" placeholder="Apellidos o Razón Social" required><br>
+    <input type="email" id="email" placeholder="Correo electrónico" required><br>
+    <input type="text" id="formacion" placeholder="Formación"><br>
+    <input type="file" id="foto" accept="image/*"><br>
+    <select id="rol" required>
+      <option value="">Selecciona tu rol</option>
+      <option value="Startup">Startup</option>
+      <option value="Empresa">Empresa</option>
+      <option value="Inversor">Inversor</option>
+      <option value="Profesional">Profesional</option>
+    </select><br>
+    <textarea id="mensaje" placeholder="Mensaje adicional (opcional)"></textarea><br>
+    <label><input type="checkbox" id="privacidad" required> Acepto la política de privacidad</label><br>
+    <button type="submit">Guardar</button>
+  </form>
+
+  
+
+  <script>
+    const form = document.getElementById('registroForm');
+    const tableBody = document.querySelector('#registrosTable tbody');
+    let registros = JSON.parse(localStorage.getItem('registros')) || [];
+
+    function renderTable() {
+      tableBody.innerHTML = '';
+      registros.forEach((reg, index) => {
+        const row = document.createElement('tr');
+        row.innerHTML = `
+          <td><img src="${reg.foto || ''}" style="width: 50px; height: 50px; object-fit: cover; border-radius: 50%;"></td>
+          <td>${reg.nombre} ${reg.apellidos}</td>
+          <td>${reg.email}</td>
+          <td>${reg.formacion}</td>
+          <td>${reg.rol}</td>
+          <td>${reg.mensaje}</td>
+          <td>
+            <button onclick="editarRegistro(${index})">Editar</button>
+            <button onclick="eliminarRegistro(${index})">Eliminar</button>
+          </td>
+        `;
+        tableBody.appendChild(row);
+      });
+    }
+
+    form.addEventListener('submit', function(e) {
+      e.preventDefault();
+      const nombre = document.getElementById('nombre').value;
+      const apellidos = document.getElementById('apellidos_or_razon').value;
+      const email = document.getElementById('email').value;
+      const formacion = document.getElementById('formacion').value;
+      const rol = document.getElementById('rol').value;
+      const mensaje = document.getElementById('mensaje').value;
+      const privacidad = document.getElementById('privacidad').checked;
+      const fotoInput = document.getElementById('foto');
+      const editIndex = document.getElementById('editIndex').value;
+
+      if (!privacidad) {
+        alert("Debes aceptar la política de privacidad.");
+        return;
+      }
+
+      const reader = new FileReader();
+      reader.onload = function() {
+        const foto = reader.result;
+        const nuevoRegistro = { nombre, apellidos, email, formacion, rol, mensaje, foto };
+
+        if (editIndex === "") {
+          registros.push(nuevoRegistro);
+        } else {
+          registros[parseInt(editIndex)] = nuevoRegistro;
+          document.getElementById('editIndex').value = "";
+        }
+
+        localStorage.setItem('registros', JSON.stringify(registros));
+        form.reset();
+        renderTable();
+      };
+
+      if (fotoInput.files.length > 0) {
+        reader.readAsDataURL(fotoInput.files[0]);
+      } else {
+        const foto = editIndex ? registros[parseInt(editIndex)].foto : "";
+        const nuevoRegistro = { nombre, apellidos, email, formacion, rol, mensaje, foto };
+
+        if (editIndex === "") {
+          registros.push(nuevoRegistro);
+        } else {
+          registros[parseInt(editIndex)] = nuevoRegistro;
+          document.getElementById('editIndex').value = "";
+        }
+
+        localStorage.setItem('registros', JSON.stringify(registros));
+        form.reset();
+        renderTable();
+      }
+    });
+
+    function editarRegistro(index) {
+      const reg = registros[index];
+      document.getElementById('nombre').value = reg.nombre;
+      document.getElementById('apellidos_or_razon').value = reg.apellidos;
+      document.getElementById('email').value = reg.email;
+      document.getElementById('formacion').value = reg.formacion;
+      document.getElementById('rol').value = reg.rol;
+      document.getElementById('mensaje').value = reg.mensaje;
+      document.getElementById('editIndex').value = index;
+      document.getElementById('privacidad').checked = true;
+    }
+
+    function eliminarRegistro(index) {
+      if (confirm("¿Seguro que deseas eliminar este registro?")) {
+        registros.splice(index, 1);
+        localStorage.setItem('registros', JSON.stringify(registros));
+        renderTable();
+      }
+    }
+
+    renderTable();
+  </script>
+
+</main>
+
+<div style="text-align: center; margin: 2rem;">
+  <a href="registro.html" style="background:#0077b6;color:white;padding:0.6rem 1.2rem;margin:0.3rem;text-decoration:none;border-radius:5px;">Registro</a>
+  </div>
+<div class="botonera">
+
+
+  <a href="startups.html" style="background:#0077b6;color:white;padding:0.6rem 1.2rem;margin:0.3rem;text-decoration:none;border-radius:5px;">Startups</a>
+  <a href="empresas.html" style="background:#0077b6;color:white;padding:0.6rem 1.2rem;margin:0.3rem;text-decoration:none;border-radius:5px;">Empresas</a>
+  <a href="inversores.html" style="background:#0077b6;color:white;padding:0.6rem 1.2rem;margin:0.3rem;text-decoration:none;border-radius:5px;">Inversores</a>
+  <a href="profesionales.html" style="background:#0077b6;color:white;padding:0.6rem 1.2rem;margin:0.3rem;text-decoration:none;border-radius:5px;">Profesionales</a>
+</div>
+
+<div class="botonera">
+<a href="admin.html" style="background:#0077b6;color:white;padding:0.6rem 1.2rem;text-decoration:none;border-radius:5px;">Administración de Registro</a></div>
+<footer>
+        &copy; 2025 Smartkea Cibersecurity
+        <div style="margin-top: 10px;">
+            <a href="https://instagram.com" target="_blank" title="Instagram">
+                <img src="https://cdn.jsdelivr.net/npm/simple-icons@v9/icons/instagram.svg" alt="Instagram" style="height: 24px; margin: 0 10px; vertical-align: middle; filter: invert(1);">
+            </a>
+            <a href="https://facebook.com" target="_blank" title="Facebook">
+                <img src="https://cdn.jsdelivr.net/npm/simple-icons@v9/icons/facebook.svg" alt="Facebook" style="height: 24px; margin: 0 10px; vertical-align: middle; filter: invert(1);">
+            </a>
+            <a href="https://twitter.com" target="_blank" title="Twitter">
+                <img src="https://cdn.jsdelivr.net/npm/simple-icons@v9/icons/twitter.svg" alt="Twitter" style="height: 24px; margin: 0 10px; vertical-align: middle; filter: invert(1);">
+            </a>
+        </div>
+    </footer>
+</body>
+</html>
