@@ -1,0 +1,196 @@
+
+<!DOCTYPE html>
+
+<html lang="es">
+<head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<title>Solicitudes de Baja</title>
+<link href="style.css" rel="stylesheet"/>
+<style>
+    main {
+      max-width: 960px;
+      margin: 2rem auto;
+      background: white;
+      padding: 1rem;
+      border-radius: 8px;
+      box-shadow: 0 4px 10px rgba(0,0,0,0.1);
+    }
+
+    h1 {
+      text-align: center;
+      margin-bottom: 2rem;
+    }
+
+    .scrollable {
+      max-height: 400px;
+      overflow-y: auto;
+    }
+
+    table {
+      width: 100%;
+      border-collapse: collapse;
+    }
+
+    th, td {
+      padding: 0.8rem;
+      border-bottom: 1px solid #ccc;
+      text-align: left;
+    }
+
+    @media (max-width: 768px) {
+      table, thead, tbody, th, td, tr {
+        display: block;
+      }
+
+      thead {
+        display: none;
+      }
+
+      td {
+        position: relative;
+        padding-left: 50%;
+        text-align: left;
+        border-bottom: 1px solid #ccc;
+      }
+
+      td::before {
+        position: absolute;
+        top: 0;
+        left: 0;
+        width: 45%;
+        padding-left: 1rem;
+        font-weight: bold;
+        white-space: nowrap;
+      }
+
+      td:nth-of-type(1)::before { content: "Nombre"; }
+      td:nth-of-type(2)::before { content: "Email"; }
+      td:nth-of-type(3)::before { content: "Motivo"; }
+      td:nth-of-type(4)::before { content: "Fecha"; }
+    }
+  </style>
+<style>
+button {
+  padding: 6px 12px;
+  background-color: #e74c3c;
+  color: white;
+  border: none;
+  border-radius: 4px;
+  cursor: pointer;
+}
+button:hover {
+  background-color: #c0392b;
+}
+</style></head>
+<body>
+<main>
+<h1>Solicitudes de Baja</h1>
+<div class="scrollable">
+<table>
+<thead>
+<tr>
+<th>Nombre</th>
+<th>Email</th>
+<th>Motivo</th>
+<th>Fecha</th>
+<th>Acciones</th></tr>
+</thead>
+<tbody id="baja-table-body">
+<!-- Las solicitudes se cargarán aquí -->
+</tbody>
+</table>
+</div>
+<div id="no-data-message" style="text-align:center; margin:2rem 0; font-weight:bold; display:none;">
+      NO HAY NINGUNA SOLICITUD
+    </div>
+<div style="text-align:center; margin-top:2rem;">
+<button onclick="exportToPDF()">Exportar a PDF</button>
+<button onclick="exportToExcel()">Exportar a Excel</button>
+</div>
+<script>
+      window.addEventListener('DOMContentLoaded', () => {
+        const table = document.querySelector('table tbody');
+        const message = document.getElementById('no-data-message');
+
+        if (!table || table.rows.length === 0) {
+          message.style.display = 'block';
+        }
+      });
+
+      function exportToPDF() {
+        window.print();
+      }
+
+      function exportToExcel() {
+        let table = document.querySelector('table');
+        if (!table) return alert("No hay datos para exportar");
+
+        let tableHTML = table.outerHTML.replace(/ /g, '%20');
+        let a = document.createElement('a');
+        a.href = 'data:application/vnd.ms-excel,' + tableHTML;
+        a.download = 'solicitudes_baja.xls';
+        a.click();
+      }
+    </script>
+</main>
+<script>
+    const bajas = JSON.parse(localStorage.getItem("bajas")) || [];
+    const tbody = document.getElementById("baja-table-body");
+
+    bajas.forEach(baja => {
+      const tr = document.createElement("tr");
+      tr.innerHTML = `
+        <td>${baja.nombre}</td>
+        <td>${baja.email}</td>
+        <td>${baja.motivo}</td>
+        <td>${new Date(baja.fecha).toLocaleString()}</td>
+      `;
+      tbody.appendChild(tr);
+    });
+  </script>
+<script>
+document.addEventListener("DOMContentLoaded", () => {
+  const bajas = JSON.parse(localStorage.getItem("bajas")) || [];
+  const tbody = document.getElementById("baja-table-body");
+
+  function eliminarBaja(index) {
+    if (confirm("¿Estás seguro de que deseas eliminar esta solicitud?")) {
+      bajas.splice(index, 1);
+      localStorage.setItem("bajas", JSON.stringify(bajas));
+      location.reload();
+    }
+  }
+
+  bajas.forEach((baja, index) => {
+    const tr = document.createElement("tr");
+
+    const tdNombre = document.createElement("td");
+    tdNombre.textContent = baja.nombre;
+
+    const tdEmail = document.createElement("td");
+    tdEmail.textContent = baja.email;
+
+    const tdMotivo = document.createElement("td");
+    tdMotivo.textContent = baja.motivo;
+
+    const tdFecha = document.createElement("td");
+    tdFecha.textContent = new Date(baja.fecha).toLocaleString();
+
+    const tdAcciones = document.createElement("td");
+    const btnEliminar = document.createElement("button");
+    btnEliminar.textContent = "Eliminar";
+    btnEliminar.onclick = () => eliminarBaja(index);
+    tdAcciones.appendChild(btnEliminar);
+
+    tr.appendChild(tdNombre);
+    tr.appendChild(tdEmail);
+    tr.appendChild(tdMotivo);
+    tr.appendChild(tdFecha);
+    tr.appendChild(tdAcciones);
+
+    tbody.appendChild(tr);
+  });
+});
+</script></body>
+</html>

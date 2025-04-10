@@ -1,160 +1,83 @@
+
 <!DOCTYPE html>
 <html lang="es">
 <head>
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <meta charset="UTF-8">
-    <title>Baja</title>
-    <style>
-
-body {
-    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
-    background: linear-gradient(to bottom right, #e0f7fa, #fdfbfb);
-    color: #1f2937;
-    margin: 0;
-}
-header {
-    background: linear-gradient(to right, #0f2027, #203a43, #2c5364);
-    color: white;
-    padding: 2rem 1rem;
-    text-align: center;
-    box-shadow: 0 4px 10px rgba(0,0,0,0.2);
-}
-header img {
-    height: 80px;
-    max-width: 100%;
-    margin-bottom: 0.5rem;
-}
-nav {
-    background-color: #0077b6;
-    display: flex;
-    justify-content: center;
-    flex-wrap: wrap;
-    box-shadow: 0 2px 6px rgba(0,0,0,0.15);
-}
-nav a {
-    color: white;
-    text-decoration: none;
-    padding: 0.8rem 1.5rem;
-    display: block;
-    font-weight: bold;
-    transition: background-color 0.3s ease;
-}
-nav a:hover {
-    background-color: #00b4d8;
-}
-main {
-    max-width: 90%;
-    width: 100%;
-    margin: auto;
-    padding: 2rem 1rem;
-    background-color: white;
-    box-shadow: 0px 2px 12px rgba(0,0,0,0.1);
-    margin-top: 2rem;
-    border-radius: 8px;
-    animation: fadeIn 1s ease-in-out;
-}
-h1, h2 {
-    color: #0a192f;
-}
-.card {
-    background-color: #f1f9ff;
-    border-left: 6px solid #0077b6;
-    padding: 1rem;
-    margin: 1rem 0;
-    border-radius: 6px;
-    box-shadow: 0 2px 4px rgba(0,0,0,0.05);
-}
-footer {
-    background-color: #0f2027;
-    color: white;
-    text-align: center;
-    padding: 1rem;
-    margin-top: 3rem;
-}
-footer a {
-    color: white;
-    text-decoration: none;
-}
-footer a:hover {
-    text-decoration: underline;
-}
-@keyframes fadeIn {
-    from { opacity: 0; transform: translateY(10px); }
-    to { opacity: 1; transform: translateY(0); }
-}
-@media (max-width: 768px) {
-    nav {
-        flex-direction: column;
-    }
-    nav a {
-        padding: 0.75rem 1rem;
-    }
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Solicitar Baja</title>
+  <link rel="stylesheet" href="style.css">
+  <style>
     main {
-        padding: 1.5rem 1rem;
+      max-width: 600px;
+      margin: 2rem auto;
+      background: white;
+      padding: 2rem;
+      border-radius: 10px;
+      box-shadow: 0 4px 10px rgba(0,0,0,0.1);
     }
-    header img {
-        height: 60px;
+    form label {
+      display: block;
+      margin-top: 1rem;
     }
-    h1 {
-        font-size: 1.5rem;
+    form input, form textarea {
+      width: 100%;
+      padding: 0.6rem;
+      margin-top: 0.3rem;
+      border: 1px solid #ccc;
+      border-radius: 5px;
     }
-}
-
-</style>
+    form button {
+      margin-top: 1.5rem;
+      padding: 0.8rem 1.5rem;
+      background-color: #0077b6;
+      color: white;
+      border: none;
+      border-radius: 5px;
+      cursor: pointer;
+    }
+    form button:hover {
+      background-color: #005f8a;
+    }
+  </style>
 </head>
 <body>
+  <main>
+    <h1>Solicitud de Baja</h1>
+    <p>Completa el formulario para solicitar tu baja. La solicitud será guardada localmente y enviada por correo.</p>
+    <form action="mailto:contacto@smartkea.com" method="post" enctype="text/plain" onsubmit="guardarBaja(event)">
+      <label for="nombre">Nombre:</label>
+      <input type="text" id="nombre" name="nombre" required>
 
-<a href="https://www.ginseg.com//" target="_blank" title="Acceder a "
-   style="position: fixed; top: 10px; right: 10px; background-color: #0a192f; color: white; padding: 8px 12px; border-radius: 6px; font-size: 14px; text-decoration: none; z-index: 1000;">
-   INTELCON
-</a>
+      <label for="email">Correo electrónico:</label>
+      <input type="email" id="email" name="email" required>
 
-    
-<header>
-    <img src="logo.png" alt="Smartkea Logo" style="height: 100px; margin-bottom: 10px;">
-    <h1 style="color: #3498db;">Smartkea Cibersecurity</h1>
-    <p>Directorio académico de startups, empresas e investigadores en ciberseguridad</p>
-</header>
+      <label for="motivo">Motivo de la baja:</label>
+      <textarea id="motivo" name="motivo" rows="4" required></textarea>
 
-    <nav>
-        <a href="index.html">Inicio</a>
-        <a href="inversores.html">Inversores</a>
-        <a href="startups.html">Startups</a>
-        <a href="empresas.html">Empresas</a>
-        <a href="profesionales.html">Profesionales</a>
-        <a href="contacto.html">Contacto</a>
-        <a href="registro.html">Registro</a>
-        <a href="baja.html">Baja</a>
-    </nav>
-    <main>
-        
-<h2>Solicitar baja</h2>
-<form action="https://formsubmit.co/tu-correo@ejemplo.com" method="POST">
-  <input type="email" name="email" placeholder="Tu correo registrado" required><br><br>
-  <input type="hidden" name="_subject" value="Solicitud de baja de Smartkea">
-  <textarea name="razon" placeholder="Motivo de baja (opcional)"></textarea><br><br>
-  <button type="submit">Solicitar baja</button>
-</form>
+      <button type="submit">Solicitar baja</button>
+    </form>
+  <p style="text-align:center; margin-top:2rem;"><a href="bajas.html" style="color:#0077b6; font-weight:bold;">Ver solicitudes registradas</a></p>
+</main>
 
-    </main>
-    
-    
-    
-    
-    
-    <footer>
-        &copy; 2025 Smartkea Cibersecurity
-        <div style="margin-top: 10px;">
-            <a href="https://instagram.com" target="_blank" title="Instagram">
-                <img src="https://cdn.jsdelivr.net/npm/simple-icons@v9/icons/instagram.svg" alt="Instagram" style="height: 24px; margin: 0 10px; vertical-align: middle; filter: invert(1);">
-            </a>
-            <a href="https://facebook.com" target="_blank" title="Facebook">
-                <img src="https://cdn.jsdelivr.net/npm/simple-icons@v9/icons/facebook.svg" alt="Facebook" style="height: 24px; margin: 0 10px; vertical-align: middle; filter: invert(1);">
-            </a>
-            <a href="https://twitter.com" target="_blank" title="Twitter">
-                <img src="https://cdn.jsdelivr.net/npm/simple-icons@v9/icons/twitter.svg" alt="Twitter" style="height: 24px; margin: 0 10px; vertical-align: middle; filter: invert(1);">
-            </a>
-        </div>
-    </footer>
+  <script>
+    function guardarBaja(event) {
+      const nombre = document.getElementById("nombre").value;
+      const email = document.getElementById("email").value;
+      const motivo = document.getElementById("motivo").value;
+
+      const nuevaBaja = {
+        nombre,
+        email,
+        motivo,
+        fecha: new Date().toISOString()
+      };
+
+      const bajas = JSON.parse(localStorage.getItem("bajas")) || [];
+      bajas.push(nuevaBaja);
+      localStorage.setItem("bajas", JSON.stringify(bajas));
+
+      alert("La solicitud se ha guardado localmente y está lista para ser enviada por correo.");
+    }
+  </script>
 </body>
 </html>
