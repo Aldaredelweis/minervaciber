@@ -1,10 +1,11 @@
 <!DOCTYPE html>
+
 <html lang="es">
 <head>
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <meta charset="UTF-8">
-    <title>Startups - Smartkea</title>
-    <style>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<meta charset="utf-8"/>
+<title>Startups - Smartkea</title>
+<style>
 
 body {
     font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
@@ -101,193 +102,113 @@ footer a:hover {
 }
 
 </style>
+<style>
+.ver-mas {
+  display: inline-block;
+  background-color: #0077b6;
+  color: white;
+  text-decoration: none;
+  padding: 0.4rem 1rem;
+  border-radius: 4px;
+  font-weight: bold;
+}
+.ver-mas:hover {
+  background-color: #005f87;
+}
+</style>
 </head>
 <body>
-
-<a href="https://www.ginseg.com//" target="_blank" title="Acceder a "
-   style="position: fixed; top: 10px; right: 10px; background-color: #0a192f; color: white; padding: 8px 12px; border-radius: 6px; font-size: 14px; text-decoration: none; z-index: 1000;">
+<a href="https://www.ginseg.com//" style="position: fixed; top: 10px; right: 10px; background-color: #0a192f; color: white; padding: 8px 12px; border-radius: 6px; font-size: 14px; text-decoration: none; z-index: 1000;" target="_blank" title="Acceder a ">
    INTELCON
 </a>
-
-    
 <header>
-    <img src="logo.png" alt="Smartkea Logo" style="height: 100px; margin-bottom: 10px;">
-    <h1 style="color: #3498db;">Smartkea Cibersecurity</h1>
-    <p>Directorio académico de startups, empresas e investigadores en ciberseguridad</p>
+<img alt="Smartkea Logo" src="logo.png" style="height: 100px; margin-bottom: 10px;"/>
+<h1 style="color: #3498db;">Smartkea Cibersecurity</h1>
+<p>Directorio académico de startups, empresas e investigadores en ciberseguridad</p>
 </header>
-
-    <nav>
-        <a href="index.html">Inicio</a>
-        <a href="inversores.html">Inversores</a>
-        <a href="startups.html">Startups</a>
-        <a href="empresas.html">Empresas</a>
-        <a href="profesionales.html">Profesionales</a>
-        <a href="contacto.html">Contacto</a>
-    </nav>
-    <main>
-        
-    <h2>Startups</h2>
-    <div class="card"><strong>CounterCraft:</strong> Plataforma de ciberdeception con sede en España, líder en defensa activa.</div>
-    
-    
-
-
-<script>
-  const registros = JSON.parse(localStorage.getItem('registros')) || [];
-  const filtrados = registros.filter(reg => reg.rol === "Startup");
-
-  const tbody = document.getElementById('startupBody');
-  filtrados.forEach(reg => {
-    const row = document.createElement('tr');
-    row.innerHTML = `
-      <td><img src="${reg.foto || ''}" style="width: 50px; height: 50px; border-radius: 50%; object-fit: cover;"></td>
-      <td>${reg.nombre} ${reg.apellidos}</td>
-      <td>${reg.email}</td>
-      <td>${reg.formacion}</td>
-      <td>${reg.mensaje}</td>
-    `;
-    tbody.appendChild(row);
-  });
-</script>
+<nav>
+<a href="index.html">Inicio</a>
+<a href="inversores.html">Inversores</a>
+<a href="startups.html">Startups</a>
+<a href="empresas.html">Empresas</a>
+<a href="profesionales.html">Profesionales</a>
+<a href="contacto.html">Contacto</a>
+</nav>
+<main>
+<h2>Startups</h2>
+<div class="card"><strong>CounterCraft:</strong> Plataforma de ciberdeception con sede en España, líder en defensa activa.</div>
 
 
 
-<script>
-  const registros = JSON.parse(localStorage.getItem('registros')) || [];
-  const filtrados = registros.filter(reg => reg.rol === "Startup");
-
-  const contenedor = document.getElementById('startupContenedor');
-  filtrados.forEach(reg => {
-    const div = document.createElement('div');
-    div.style.cssText = "background: #fff; border-left: 5px solid #0077b6; padding: 1rem; box-shadow: 0 2px 8px rgba(0,0,0,0.05); border-radius: 4px; display: flex; align-items: center; gap: 1rem;";
-    div.innerHTML = `
-      <img src="${reg.foto || ''}" alt="Foto" style="width: 60px; height: 60px; border-radius: 50%; object-fit: cover;">
-      <div>
-        <p><strong>${reg.nombre} ${reg.apellidos}</strong> – ${reg.formacion}</p>
-        <p><em>${reg.email}</em></p>
-        <p>${reg.mensaje}</p>
-      </div>
-    `;
-    contenedor.appendChild(div);
-  });
-</script>
-
-
-
-<script>
-  const registros = JSON.parse(localStorage.getItem('registros')) || [];
-  const startups = registros.filter(reg => reg.rol === "Startup");
-
-  const contenedor = document.getElementById('startupContenedor');
-  startups.forEach(reg => {
-    const div = document.createElement('div');
-    div.style.cssText = "background: #fff; border-left: 5px solid #0077b6; padding: 1rem; box-shadow: 0 2px 8px rgba(0,0,0,0.05); border-radius: 4px; display: flex; align-items: center; gap: 1rem;";
-    div.innerHTML = `
-      <img src="${reg.foto || ''}" alt="Foto" style="width: 60px; height: 60px; border-radius: 50%; object-fit: cover;">
-      <div>
-        <p><strong>${reg.nombre} ${reg.apellidos}</strong> – ${reg.formacion}</p>
-        <p><em>${reg.email}</em></p>
-        <p>${reg.mensaje}</p>
-      </div>
-    `;
-    contenedor.appendChild(div);
-  });
-</script>
 </main>
-    
-    
-    
-    
-    
-    
-
-
 <section id="lista-startup" style="padding: 2rem; max-width: 1000px; margin: auto;">
-  <h2 style="margin-bottom: 1rem;">Startups Registrados</h2>
-  <div id="startupContenedor" style="display: flex; flex-direction: column; gap: 1rem; padding-left: 1rem;"></div>
-</section>
+<h2 style="margin-bottom: 1rem;">Startups Registradas</h2>
+<div id="startupContenedor">
 
+        <div style="background: #fff; border-left: 5px solid #0077b6; padding: 1rem; box-shadow: 0 2px 8px rgba(0,0,0,0.05); border-radius: 4px; margin-bottom: 1rem; display: flex; gap: 1rem; align-items: center;">
+          <img src="https://via.placeholder.com/100" alt="Foto" style="width: 60px; height: 60px; border-radius: 50%; object-fit: cover;">
+          <div style="flex: 1;">
+            <p><strong>CounterCraft</strong> – CiberDeception</p>
+            <p><em>info@countercraft.com</em></p>
+            <p>Defensa activa e inteligencia de amenazas.</p>
+          </div>
+          <div>
+            <a href="startups_detalle/countercraft-.html" class="ver-mas">Ver más →</a>
+          </div>
+        </div>
+        
+</div>
+</section>
 <div style="text-align: center; margin: 2rem auto;">
-  
-  
 </div>
 
+<footer>
+        © 2025 Smartkea Cibersecurity
+        <div style="margin-top: 10px;">
+<a href="https://instagram.com" target="_blank" title="Instagram">
+<img alt="Instagram" src="https://cdn.jsdelivr.net/npm/simple-icons@v9/icons/instagram.svg" style="height: 24px; margin: 0 10px; vertical-align: middle; filter: invert(1);"/>
+</a>
+<a href="https://facebook.com" target="_blank" title="Facebook">
+<img alt="Facebook" src="https://cdn.jsdelivr.net/npm/simple-icons@v9/icons/facebook.svg" style="height: 24px; margin: 0 10px; vertical-align: middle; filter: invert(1);"/>
+</a>
+<a href="https://twitter.com" target="_blank" title="Twitter">
+<img alt="Twitter" src="https://cdn.jsdelivr.net/npm/simple-icons@v9/icons/twitter.svg" style="height: 24px; margin: 0 10px; vertical-align: middle; filter: invert(1);"/>
+</a>
+</div>
+</footer>
+
 
 <script>
-  document.addEventListener("DOMContentLoaded", function () {
-    const registros = JSON.parse(localStorage.getItem('registros')) || [];
-    const filtrados = registros.filter(reg => reg.rol === "Startup");
-    const contenedor = document.getElementById("startupContenedor");
+const registros = JSON.parse(localStorage.getItem('registros')) || [];
+const rolActual = "Startup";
+const detalleDir = "startups_detalle";
+const contenedorId = "startupContenedor";
 
-    filtrados.forEach(reg => {
-      const div = document.createElement('div');
-      div.style.cssText = "background: #fff; border-left: 5px solid #0077b6; padding: 1rem; box-shadow: 0 2px 8px rgba(0,0,0,0.05); border-radius: 4px; display: flex; align-items: center; gap: 1rem;";
-      div.innerHTML = `
-        <img src="${reg.foto || ''}" alt="Foto" style="width: 60px; height: 60px; border-radius: 50%; object-fit: cover;">
-        <div>
-          <p><strong>${reg.nombre} ${reg.apellidos || reg.apellidos_or_razon}</strong> – ${reg.formacion}</p>
-          <p><em>${reg.email}</em></p>
-          <p>${reg.mensaje}</p>
-        </div>
-      `;
-      contenedor.appendChild(div);
-    });
-  });
+const filtrados = registros.filter(reg => reg.rol === rolActual);
+const contenedor = document.getElementById(contenedorId);
 
-  function exportarCSV(rol) {
-    const registros = JSON.parse(localStorage.getItem('registros')) || [];
-    const filtrados = registros.filter(r => r.rol === rol);
-    let csvContent = "data:text/csv;charset=utf-8,Nombre,Apellidos,Email,Formación,Mensaje\n";
-    filtrados.forEach(r => {
-      csvContent += `${r.nombre},${r.apellidos || r.apellidos_or_razon},${r.email},${r.formacion},${r.mensaje}\n`;
-    });
-    const encodedUri = encodeURI(csvContent);
-    const link = document.createElement("a");
-    link.setAttribute("href", encodedUri);
-    link.setAttribute("download", rol + "_registros.csv");
-    document.body.appendChild(link);
-    link.click();
-    document.body.removeChild(link);
-  }
+filtrados.forEach(reg => {
+  const slug = `${reg.nombre}-${reg.apellidos || ''}`
+    .toLowerCase()
+    .normalize("NFD").replace(/[̀-ͯ]/g, "")
+    .replace(/\s+/g, "-")
+    .replace(/[^a-z0-9-]/g, "");
 
-  async function exportarPDF(rol) {
-    const registros = JSON.parse(localStorage.getItem('registros')) || [];
-    const filtrados = registros.filter(r => r.rol === rol);
-
-    const { jsPDF } = window.jspdf;
-    const doc = new jsPDF();
-    doc.setFontSize(12);
-    doc.text("Startups Registrados", 14, 15);
-
-    let y = 25;
-    filtrados.forEach((r, i) => {
-      doc.text(`Nombre: ${r.nombre} ${r.apellidos || r.apellidos_or_razon}`, 14, y);
-      doc.text(`Email: ${r.email}`, 14, y + 6);
-      doc.text(`Formación: ${r.formacion}`, 14, y + 12);
-      doc.text(`Mensaje: ${r.mensaje}`, 14, y + 18);
-      y += 30;
-      if (y > 270) {
-        doc.addPage();
-        y = 20;
-      }
-    });
-
-    doc.save(rol + "_registros.pdf");
-  }
+  const div = document.createElement('div');
+  div.style.cssText = "background: #fff; border-left: 5px solid #0077b6; padding: 1rem; box-shadow: 0 2px 8px rgba(0,0,0,0.05); border-radius: 4px; margin-bottom: 1rem; display: flex; gap: 1rem; align-items: center;";
+  div.innerHTML = `
+    <img src="${reg.foto || ''}" alt="Foto" style="width: 60px; height: 60px; border-radius: 50%; object-fit: cover;">
+    <div style="flex: 1;">
+      <p><strong>${reg.nombre} ${reg.apellidos}</strong> – ${reg.formacion}</p>
+      <p><em>${reg.email}</em></p>
+      <p>${reg.mensaje}</p>
+    </div>
+    <div>
+      <a href="${detalleDir}/${slug}.html" class="ver-mas">Ver más →</a>
+    </div>
+  `;
+  contenedor.appendChild(div);
+});
 </script>
-<footer>
-        &copy; 2025 Smartkea Cibersecurity
-        <div style="margin-top: 10px;">
-            <a href="https://instagram.com" target="_blank" title="Instagram">
-                <img src="https://cdn.jsdelivr.net/npm/simple-icons@v9/icons/instagram.svg" alt="Instagram" style="height: 24px; margin: 0 10px; vertical-align: middle; filter: invert(1);">
-            </a>
-            <a href="https://facebook.com" target="_blank" title="Facebook">
-                <img src="https://cdn.jsdelivr.net/npm/simple-icons@v9/icons/facebook.svg" alt="Facebook" style="height: 24px; margin: 0 10px; vertical-align: middle; filter: invert(1);">
-            </a>
-            <a href="https://twitter.com" target="_blank" title="Twitter">
-                <img src="https://cdn.jsdelivr.net/npm/simple-icons@v9/icons/twitter.svg" alt="Twitter" style="height: 24px; margin: 0 10px; vertical-align: middle; filter: invert(1);">
-            </a>
-        </div>
-    </footer>
 </body>
 </html>
